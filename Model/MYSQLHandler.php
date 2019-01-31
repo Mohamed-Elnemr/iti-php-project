@@ -123,7 +123,7 @@ class MYSQLHandler implements DbHandler
             $columns = str_replace(", from", "", $columns);
          }
         $table = $this->_table;
-        $sql = "select $columns from `$table` where `$column` like '" . $column_value . "'";
+        $sql = "select $columns from `$table` where `$column` like '" . $column_value ."%". "'";
         $this->debug($sql);
         return $this->get_results($sql);
     }
