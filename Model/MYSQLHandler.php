@@ -30,13 +30,13 @@ class MYSQLHandler implements DbHandler
     {
         $table = $this->_table;
         if (empty($fields)) {
-            $sql = "select * from " . $table;
+            $sql = "select * from " . $table."where administrator=0";
         } else {
             $sql = "select ";
             foreach ($fields as $f) {
                 $sql .= "`$f` ,";
             }
-            $sql .= " from `$table`";
+            $sql .= " from `$table` where administrator=0";
             $sql = str_replace(", from", "from", $sql);
         }
         $sql .= " limit $start," .__RECORDS_PER_PAGE__;
@@ -47,13 +47,13 @@ class MYSQLHandler implements DbHandler
     {
         $table = $this->_table;
         if (empty($fields)) {
-            $sql = "select * from " . $table;
+            $sql = "select * from " . $table."where administrator=0";
         } else {
             $sql = "select ";
             foreach ($fields as $f) {
                 $sql .= "`$f` ,";
             }
-            $sql .= " from `$table`";
+            $sql .= " from `$table` where administrator=0";
             $sql = str_replace(", from", "from", $sql);
         }
         return $this->get_results($sql);
@@ -69,7 +69,7 @@ class MYSQLHandler implements DbHandler
     {
         $table = $this->_table;
         // $sql = "select * from `$table` where `$primary_key` = $id";
-        $sql = "select * from `$table` where `$primary_key` = ?";
+        $sql = "select * from `$table` where `$primary_key` = ? and administrator=0" ;
         return $this->get_results($sql, array($id)); //will not use mysqli_query use statment
         return $this->get_results($sql);
     }
@@ -124,7 +124,7 @@ class MYSQLHandler implements DbHandler
             $columns = str_replace(", from", "", $columns);
          }
         $table = $this->_table;
-        $sql = "select $columns from `$table` where  LOWER( ".$column." )like  LOWER('" . $column_value ."%". "')";
+        $sql = "select $columns from `$table` where  LOWER( ".$column." )like  LOWER('" . $column_value ."%". "') and administrator=0";
         $this->debug($sql);
         
         return $this->get_results($sql);
@@ -167,7 +167,7 @@ class MYSQLHandler implements DbHandler
     public function get_data_count()
     {
         $table = $this->_table;
-        $sql = "select COUNT(*) from `$table`";
+        $sql = "select COUNT(*) from `$table` where administrator=0";
         $this->debug($sql);
         return $this->get_results($sql);
     }
