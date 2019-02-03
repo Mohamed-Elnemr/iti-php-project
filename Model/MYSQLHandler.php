@@ -39,7 +39,7 @@ class MYSQLHandler implements DbHandler
             $sql .= " from `$table`";
             $sql = str_replace(", from", "from", $sql);
         }
-        $sql .= " limit $start," . __RECORD_PER_PAGE__;
+        $sql .= " limit $start," .__RECORDS_PER_PAGE__;
         return $this->get_results($sql);
     }
 
@@ -111,6 +111,7 @@ class MYSQLHandler implements DbHandler
 
     public function search($column, $column_value,$fields = array())
     {    $columns="";
+        //$column_value=strtolower($column_value);
          if(empty($fields))
          {
             $columns="*";
@@ -123,8 +124,9 @@ class MYSQLHandler implements DbHandler
             $columns = str_replace(", from", "", $columns);
          }
         $table = $this->_table;
-        $sql = "select $columns from `$table` where `$column` like '" . $column_value ."%". "'";
+        $sql = "select $columns from `$table` where  LOWER( ".$column." )like  LOWER('" . $column_value ."%". "')";
         $this->debug($sql);
+        
         return $this->get_results($sql);
     }
 
@@ -169,4 +171,5 @@ class MYSQLHandler implements DbHandler
         $this->debug($sql);
         return $this->get_results($sql);
     }
+    
 }
