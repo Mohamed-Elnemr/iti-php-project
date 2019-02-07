@@ -13,58 +13,22 @@ $previous_index =  ($current_index - __RECORDS_PER_PAGE__ >0) ? $current_index -
 <html>
     <head>
         <title>  Search </title>
-      <style> 
-            table
-             {
-              width:60%;
-              margin: auto;
-             }
-            table, th, td 
-            {
-            border: 1px solid black;
-            border-collapse: collapse;
-            }
-            th, td 
-            {
-            padding: 15px;
-            text-align: left;
-            }
-            table tr:nth-child(even) 
-            {
-            background-color: #eee;
-            }
-            table tr:nth-child(odd)
-            {
-            background-color: #fff;
-            }
-            table th 
-            {
-            background-color: black;
-            color: white;
-            }
-            #Search_form{
-                margin: auto;
-                width:30%;
-                margin-bottom: 20px;
-            }
-            .nextprev
-             {
-               background-color: #0095B3;
-               color: #ffffff;
-               text-decoration: none;
-               padding:10px;
-               font-size: 20px;
-               margin: 10px;
-               border-radius: 7px;
-
-               
-            }
-              
-</style>
+        <link rel="stylesheet" type="text/css" href="style/style.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     </head>
     <body>
-       <a href="<?php echo $_SERVER["PHP_SELF"]."?logout"; ?> ">logout</a>  
-
+       <!-- <a href="<?php echo $_SERVER["PHP_SELF"]."?logout"; ?> ">logout</a>  
+       <a href="<?php echo $_SERVER["PHP_SELF"]."?search"; ?> ">Search</a>   -->
+       <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+            <a class="nav-item nav-link active" href="<?php echo $_SERVER["PHP_SELF"]."?users"; ?>">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="<?php echo $_SERVER["PHP_SELF"]."?search"; ?>">search</a>
+            <a class="nav-item nav-link" href="<?php echo $_SERVER["PHP_SELF"]."?logout"; ?>">logout</a>
+            
+        </div>
+       </nav>
 
         <!-- <form id="Search_form" action='' method="POST" enctype="multipart/form-data">
              <label> Search </label>
@@ -73,13 +37,13 @@ $previous_index =  ($current_index - __RECORDS_PER_PAGE__ >0) ? $current_index -
             
         </form> -->
         
-        <div id="result">
+        <div id="result" style="  margin-top: 30px;">
             <table >
                 <tr>
-                    <th>name</th>
-                    <th> user name</th>
+                    <th>Name</th>
+                    <th> User name</th>
                     <th>JOB</th> 
-                    <th>more info</th>
+                    <th>More info</th>
                  </tr>
                 <?php
                     //<?php echo $_SERVER["PHP_SELF"]; 

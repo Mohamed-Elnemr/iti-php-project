@@ -1,6 +1,7 @@
 /* Bordered form */
 form {
-    border: 3px solid #f1f1f1;
+    border: 1px solid #252d8d;
+    border-radius: 2px;
     width:40%;
     margin: auto;
   }
@@ -15,9 +16,9 @@ form {
     box-sizing: border-box;
   }
   
-  /* Set a style for all buttons */
-  button {
-    background-color: #4CAF50;
+ 
+  .login{
+    background-color: #252d8d;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -27,7 +28,7 @@ form {
   }
   
   /* Add a hover effect for buttons */
-  button:hover {
+  .login:hover {
     opacity: 0.8;
   }
   
@@ -60,6 +61,56 @@ form {
     float: right;
     padding-top: 16px;
   }
+  table
+  {
+   width:60%;
+   margin: auto;
+   margin-top: 20px;
+  }
+ table, th, td 
+ {
+ border: 1px solid black;
+ border-collapse: collapse;
+ }
+ th, td 
+ {
+ padding: 15px;
+ text-align: left;
+ }
+ table tr:nth-child(even) 
+ {
+ background-color: #eee;
+ }
+ table tr:nth-child(odd)
+ {
+ background-color: #fff;
+ }
+ table th 
+ {
+ background-color:#252d8d;
+ color: white;
+ }
+ #Search_form{
+     margin: auto;
+     width:30%;
+     margin-bottom: 20px;
+ }
+ .nextprev
+  {
+    background-color: #252d8d;
+    color: #ffffff;
+    text-decoration: none;
+    padding:10px;
+    font-size: 20px;
+    margin: 10px;
+    border-radius: 3px;
+
+    
+ }
+ 
+ .search{
+   border: none;
+ }
   
   /* Change styles for span and cancel button on extra small screens */
   @media screen and (max-width: 300px) {
