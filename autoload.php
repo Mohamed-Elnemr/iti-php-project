@@ -1,5 +1,6 @@
 <?php
 require_once("config.php");
+
 function my_autoloader($class) {    
 
     $path = __DIR__.'/Model/' . $class . '.php';

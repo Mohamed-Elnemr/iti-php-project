@@ -38,7 +38,7 @@
 		}
 
 		/*** for login process ***/
-		public function check_login($username,$password){
+		public function check_login($username,$password,$remember){
             //echo $password."<br>";
 			$pass = hash('sha256', $password);
 			//echo $pass;
@@ -49,12 +49,17 @@
         	$user_data = mysqli_fetch_array($result);
 			$count_row = $result->num_rows;
 			
-           
+		   echo $remember;
+		    
 	        if ($count_row == 1) {
 	            // this login var will use for the session thing
 	            $_SESSION['login'] = true;
 				$_SESSION['user_id'] = $user_data['id'];
 				$_SESSION['administrator'] = $user_data['administrator'];
+				if($remember=="on")
+				{ $_SESSION['remember']="on";
+				  $_SESSION['username']=$username;		
+				}
 	            return true;
 	        }
 	        else{
