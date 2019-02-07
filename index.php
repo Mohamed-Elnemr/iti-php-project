@@ -12,14 +12,20 @@ define("_ALLOW_ACCESS", 1);
 session_start();
 session_regenerate_id();
 //Routing
-if (isset($_SESSION["user_id"]) && $_SESSION["administrator"] === "1") 
+//var_dump($_POST);
+if (isset($_SESSION["user_id"]) && $_SESSION["administrator"] === __ADMIN__) 
 {
     //admin views should be required here
     if(isset($_GET["logout"]))
     { User::user_logout();  
       header('Location:index.php');
     }
-    if(isset($_GET["id"]) && is_numeric($_GET["id"]))
+    elseif(isset($_GET["search"]))
+    {    
+        require_once ("Views/admin/search.php");
+        //die();
+    }
+    elseif(isset($_GET["id"]) && is_numeric($_GET["id"]))
     {
         require_once ("Views/admin/user.php");   
     
@@ -27,9 +33,9 @@ if (isset($_SESSION["user_id"]) && $_SESSION["administrator"] === "1")
     {
         require_once ("Views/admin/users.php");
     }
+   
     
-    
-} elseif (isset($_SESSION["user_id"]) && $_SESSION["administrator"] === "0") 
+} elseif (isset($_SESSION["user_id"]) && $_SESSION["administrator"] === __NORMAL_USER__) 
 {
     //members views should be required here
     require_once ("Views/member/view_my_profile.php");
@@ -43,7 +49,7 @@ if (isset($_SESSION["user_id"]) && $_SESSION["administrator"] === "1")
     else if($_SERVER['REQUEST_METHOD']=='POST')
     {
         $user=new User();
-        if($user->check_login($_POST["username"],$_POST["password"]))
+        if($user->check_login($_POST["username"],$_POST["password"],$_POST["remember"]))
         {   
            header("refresh:0");
         }else
@@ -65,4 +71,12 @@ if (isset($_SESSION["user_id"]) && $_SESSION["administrator"] === "1")
 //********************************************//
 
  //public views should be required here
+  // var_dump($_SESSION);
+    // if( isset($_SESSION["remember"])&&$_SESSION["remember"]=="on")
+    // {               //$_SESSION['password']=$password;
+    //    // $_SESSION['username']=$username;
+    //                 $hour = time() + 3600 * 24 * 30;
+    //                 setcookie('username', $_SESSION['username'], $hour);
+                    
+    // }
     
