@@ -5,7 +5,7 @@
      <body>
             <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="POST">
                 <div class="imgcontainer">
-                    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+                    <img src="style/login.png" alt="Avatar" class="avatar">
                 </div>
 
                 <div class="container">
@@ -17,16 +17,17 @@
                     <label for="psw"><b>Password</b></label>
                     <input type="password" placeholder="Enter Password" name="password" required>
                     
-                    <button type="submit">Login</button>
+                    <button type="submit" class="login">Login</button>
                     <label>
                     <input type="checkbox" checked="checked" name="remember"> Remember me
                     </label>
+                    <div class="container" style="background-color:#f1f1f1">
+                    
+                       <span class="psw">  <a href="<?php echo $_SERVER["PHP_SELF"]."?Create_Account"; ?> ">Create Account </a> </span>
+                   </div>
                 </div>
 
-                <div class="container" style="background-color:#f1f1f1">
-                    
-                    <span class="psw">  <a href="<?php echo $_SERVER["PHP_SELF"]."?Create_Account"; ?> ">Create Account </a> </span>
-                </div>
+                
         </form>
      <body>
 </html>
