@@ -26,6 +26,7 @@ $previous_index =  ($current_index - __RECORDS_PER_PAGE__ >0) ? $current_index -
             <a class="nav-item nav-link active" href="<?php echo $_SERVER["PHP_SELF"]."?users"; ?>">Home <span class="sr-only">(current)</span></a>
             <a class="nav-item nav-link" href="<?php echo $_SERVER["PHP_SELF"]."?search"; ?>">search</a>
             <a class="nav-item nav-link" href="<?php echo $_SERVER["PHP_SELF"]."?logout"; ?>">logout</a>
+            <a class="nav-item nav-link" href="<?php echo $_SERVER["PHP_SELF"]."?UserReport_Export"; ?>">UserReport Export</a>
             
         </div>
        </nav>

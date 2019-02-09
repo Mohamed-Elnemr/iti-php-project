@@ -6,8 +6,7 @@
 		public $db;
 
 		public function __construct(){
-			$this->db = new mysqli(__HOST__,__USER__,__PASS__, __DB__);
-
+			@$this->db =new mysqli(__HOST__, __USER__, __PASS__, __DB__);
 			if(mysqli_connect_errno()) {
 				echo "Error: Could not connect to database.";
 			        exit;
@@ -49,16 +48,17 @@
         	$user_data = mysqli_fetch_array($result);
 			$count_row = $result->num_rows;
 			
-		   echo $remember;
+		   
 		    
 	        if ($count_row == 1) {
 	            // this login var will use for the session thing
 	            $_SESSION['login'] = true;
 				$_SESSION['user_id'] = $user_data['id'];
 				$_SESSION['administrator'] = $user_data['administrator'];
-				if($remember=="on")
-				{ $_SESSION['remember']="on";
-				  $_SESSION['username']=$username;		
+				if($remember==="on")
+				{  $hour = time() + 3600 * 24 * 30;
+				   setcookie('user_postion', $user_data['administrator'], $hour);	
+				   setcookie('user_id', $user_data['id'], $hour);	
 				}
 	            return true;
 	        }
@@ -73,18 +73,57 @@
 	        $result = mysqli_query($this->db,$sql3);
 	        $user_data = mysqli_fetch_array($result);
 	        return $user_data['fullname'];
-    	}
+		}
+		public function saveImage($FILE){
+            // if(file_exists($FILE))
+            $filename = $_FILES["photo"]["name"];
+             $filetype = $_FILES["photo"]["type"];
+             $filesize = $_FILES["photo"]["size"];
+             
+            move_uploaded_file($_FILES["photo"]["tmp_name"], "resources/Images" . $_POST["username"].".jpg");
+//                echo "Your file was uploaded successfully.";
+
+            
+        }
+        public function saveCV($FILE){
+             $filename = $_FILES["cv"]["name"];
+             $filetype = $_FILES["cv"]["type"];
+             $filesize = $_FILES["cv"]["size"];
+             
+            move_uploaded_file($_FILES["cv"]["tmp_name"], "resources/CVs" . $_POST["username"].".pdf");
+//                echo "Your file was uploaded successfully.";
+            
+        }
         
     	/*** starting the session ***/
 		public function get_session()
 		{
 	        return $_SESSION['login'];
-	    }
+		}
+		
+		
 
+		public function edit_data($id,$username,$job,$name,$image_name,$cv_name)
+		{
+			
+			$SQL = $this->db->prepare("UPDATE users SET user_name=?, job=?,name=?,image_name=?,cv_name=? WHERE id=?");
+			
+			if($SQL)
+			{$SQL->bind_param('sssssi',$username,$job,$name,$image_name,$cv_name,$id);
+				
+			return $SQL->execute();
+			}
+			return FALSE;
+
+		}
 		public static function user_logout()
 		{
 	        $_SESSION['login'] = FALSE;
-	        session_destroy();
+			session_destroy();
+			if(isset($_COOKIE["user_id"])&&isset($_COOKIE["user_postion"]))
+            {
+			setcookie('user_postion', '', time() - 3600);
+			setcookie('user_id', '', time() - 3600);}
 		}
 		public  function disconnect()
        {
