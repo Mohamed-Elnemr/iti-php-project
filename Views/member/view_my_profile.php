@@ -1,11 +1,14 @@
 <?php
+require_once "autoload.php";
+
 $DB_conection = new MYSQLHandler("users");
 $DB_conection->connect();
 $items = $DB_conection->get_record_by_id($_SESSION['user_id'], "id");
 $user_name = $items[0]["user_name"];
 $pdf_name = $user_name . ".pdf";
-// $imagePath="../../";
-// $cvPath="/resource/CVs";
+$imagespath=__IMAGESPATH__;
+$cvpath=__CVSPATH__;
+
 
 
 ?>
@@ -36,7 +39,7 @@ $pdf_name = $user_name . ".pdf";
 				<div class="row">
 					<div class="col-md-12">
 						<div class="bio-image">
-							<img src="<?php echo $items[0]['user_name'].".jpg";?>" alt="image" />
+							<img src="<?php echo __IMAGESPATH__.$items[0]['user_name'].".jpg";?>" alt="image" height='350px' width='25%'/>
 						</div>			
 					</div>
 				</div>	
@@ -45,7 +48,7 @@ $pdf_name = $user_name . ".pdf";
 				<div class="bio-content">
 					<h1>Hi there, I'm <?php echo $items[0]['name'] ;?></h1>
 					<h6> I Work As <?php echo $items[0]['job'];?></h6>
-                                          <?php     echo "<center><embed src='".trim($pdf_name)."' type='application/pdf'   height='1150px' width='60%'></center>";?>
+                                          <?php  echo "<embed src='__CVSPATH__".trim($pdf_name)."' type='application/pdf'   height='900px' width='65%'>";?>
 
 				</div>
 			</div>

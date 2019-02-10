@@ -1,5 +1,5 @@
 <?php
-//require_once "config.php";
+require_once "autoload.php";
 
 	class User{
 
@@ -14,6 +14,7 @@
 		}
 
 		/*** for registration process ***/
+
 		public function reg_user($username,$password,$name,$job,$image_name,$cv_name){
 
 			//$password = hash('sha256', $_POST['ppasscode']);
@@ -79,8 +80,10 @@
             $filename = $_FILES["photo"]["name"];
              $filetype = $_FILES["photo"]["type"];
              $filesize = $_FILES["photo"]["size"];
+             $uploads_dir = __IMAGESPATH__;
              
-            move_uploaded_file($_FILES["photo"]["tmp_name"], "resources/Images" . $_POST["username"].".jpg");
+
+            move_uploaded_file($_FILES["photo"]["tmp_name"], $uploads_dir.$_POST['username'].".jpg");
 //                echo "Your file was uploaded successfully.";
 
             
@@ -89,8 +92,9 @@
              $filename = $_FILES["cv"]["name"];
              $filetype = $_FILES["cv"]["type"];
              $filesize = $_FILES["cv"]["size"];
+            $uploads_dir = __CVSPATH__;
              
-            move_uploaded_file($_FILES["cv"]["tmp_name"], "resources/CVs" . $_POST["username"].".pdf");
+            move_uploaded_file($_FILES["cv"]["tmp_name"], $uploads_dir.$_POST['username'].".pdf");
 //                echo "Your file was uploaded successfully.";
             
         }
@@ -105,11 +109,12 @@
 
 		public function edit_data($id,$username,$job,$name,$image_name,$cv_name)
 		{
-			
+                
+
 			$SQL = $this->db->prepare("UPDATE users SET user_name=?, job=?,name=?,image_name=?,cv_name=? WHERE id=?");
 			
 			if($SQL)
-			{$SQL->bind_param('sssssi',$username,$job,$name,$image_name,$cv_name,$id);
+			{$SQL->bind_param('sssssi',$username,$name,$job,$image_name,$cv_name,$id);
 				
 			return $SQL->execute();
 			}

@@ -39,14 +39,13 @@ class Validate {
     }
     public function validateimage($FILE){
      if(isset($_FILES["photo"]) && $_FILES["photo"]["error"] == 0){
-         echo "<h3>inside validate image <h3>";
         //  var_dump(__ALLOWEDIMAGE__);
         $allowedImage = array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png");
      
         $filetype = $_FILES["photo"]["type"];
         $filesize = $_FILES["photo"]["size"];
 
-        $maxsize = 5*1024*1024; 
+        $maxsize = __MAXSIZE__;
         if((in_array($filetype, $allowedImage)&&$filesize<$maxsize)){
             return TRUE;
         } else{
@@ -57,11 +56,10 @@ class Validate {
     public function validatecv($FILE){
      if(isset($_FILES["cv"]) && $_FILES["cv"]["error"] == 0){
         $allowedCV = array("pdf" => "application/pdf");
-        echo "<h4>inside validate cv <h4>";
         $filetype = $_FILES["cv"]["type"];
         $filesize = $_FILES["cv"]["size"];
 
-        $maxsize = 5*1024*1024; 
+        $maxsize = __MAXSIZE__;
         if((in_array($filetype, $allowedCV)&& $filesize<$maxsize)){
             return TRUE;
         } else{

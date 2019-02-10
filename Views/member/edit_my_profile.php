@@ -7,8 +7,7 @@ session_regenerate_id();
 $DB_conection = new MYSQLHandler("users");
 $DB_conection->connect();
 $items = $DB_conection->get_record_by_id($_SESSION['user_id'], "id");
-// var_dump($items);
-// var_dump($_POST);
+
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -32,9 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         
     } else {
         $user = new User();
-        echo "after user creation";
+      
+
         if($user->edit_data($_SESSION['user_id'],$_POST["username"], $_POST["name"], $_POST["job"], $_FILES['photo']['name'], $_FILES['cv']['name'])){
-          echo "after edit data";  
             $user->saveImage($_FILES['photo']);
             $user->saveCV($_FILES['cv']);
         }else{

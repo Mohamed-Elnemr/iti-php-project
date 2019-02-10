@@ -1,7 +1,7 @@
 <?php
 define("__HOST__","localhost");
 define("__USER__","root");
-define("__PASS__","");
+define("__PASS__","22121989");
 define("__DB__","hr");
 define("__RECORDS_PER_PAGE__",5);
 define("__DEBUG_MODE__",0);
@@ -14,6 +14,9 @@ $error_register=array("username"=>"","password"=>"","Image"=>"","C.V"=>"");
 define ("__MAXSIZE__",5*1024*1024);
 define("__ALLOWEDIMAGE__",array("jpg" => "image/jpg", "jpeg" => "image/jpeg", "gif" => "image/gif", "png" => "image/png"));
 define("__ALLOWEDCVS__",array("pdf" => "application/pdf"));
+define ("__CVSPATH__","resources/CVs/");
+define ("__IMAGESPATH__","resources/Images/");
+
 
 
 

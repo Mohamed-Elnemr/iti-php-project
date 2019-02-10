@@ -21,7 +21,7 @@ $pdf_name=$user_name.".pdf";
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   
 </head>
-<body style="margin=0px; padding=0px;">
+<body">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
     
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
